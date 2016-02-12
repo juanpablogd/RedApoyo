@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO prueba</title>
+    <script src="socket.io.js"></script>
+  </head>
+  
+  <body>
+   
+	<script>
+	 	var socket = io.connect('http://saga.cundinamarca.gov.co:3321');
+		socket.on('connect', function () {
+		    socket.send('hi');
+		    socket.on('message', function (msg) {
+		    });
+	  	});
+
+	</script>
+  </body>
+
+</html>

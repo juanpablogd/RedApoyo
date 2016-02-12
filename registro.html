@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame 
+       Remove this if you use the .htaccess -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>index</title>
+  <meta name="description" content="">
+  <meta name="author" content="skaphe">
+
+  <meta name="viewport" content="initial-scale=1.0">
+
+  <!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="bootstrap-3.3/css/bootstrap.min.css">
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="bootstrap-3.3/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="css/registro.css">
+	<link rel="stylesheet" href="css/animate.css">
+	<style>
+		#btn_Iniciar {
+			margin-top: -7px;
+		}
+		.col-md-offset-4 {
+			margin-top: -7% !important;
+		}
+		textarea.vert { resize:vertical; }
+	</style>
+	<script src="js/jquery.min.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="bootstrap-3.3/js/bootstrap.min.js"></script>
+	<script src="bootstrap-growl-master/bootstrap-growl.min.js"></script>
+	<script src="js/bootbox.min.js"></script>
+
+<!--INICIO	CORDOVA		-->	
+	<script type="text/javascript" src="cordova.js"></script>
+	<script type="text/javascript" src="js/estado_registro.js"></script>
+<!--FIN	CORDOVA		-->
+</head>
+
+<body>
+  <div>
+
+<div class="container">
+    <div class="row vertical-offset-100">
+    	<div class="col-md-4 col-md-offset-4">
+    		<div class="panel panel-default">
+			  	<div class="panel-heading">
+			  		<a href="login.html" class="btn btn-sm btn-success pull-right" type="button" id="btn_Iniciar">Iniciar Sesión</a>
+			    	<h3 class="panel-title">REGISTRATE</h3>
+			 	</div>
+			  	<div class="panel-body">
+			    	<form accept-charset="UTF-8" role="form">
+                    <fieldset>
+			    	  	<div class="form-group">
+			    	  		<label style="color: red">*</label><label for="nombres" class="select">Nombres:</label>
+			    		    <input class="form-control" placeholder="Nombres" id="nombres" name="nombres" type="text">
+			    		</div>
+			    	  	<div class="form-group">
+			    	  		<label style="color: red">*</label><label for="apellidos" class="select">Apellidos:</label>
+			    		    <input class="form-control" placeholder="Apellidos" id="apellidos" name="apellidos" type="text">
+			    		</div>
+			    	  	<div class="form-group">
+			    	  		<label style="color: red">*</label><label for="cedula" class="select">Cédula:</label>
+			    		    <input class="form-control" placeholder="Cédula" id="cedula" name="cedula" type="number" onkeypress="if (event.keyCode< 48 || event.keyCode > 57) event.returnValue = false;">
+			    		</div>
+			    		<div class="form-group">
+			    			<label style="color: red">*</label><label for="telefono" class="select">Número teléfonico:</label>
+			    		    <input class="form-control" placeholder="Número teléfonico" id="telefono" name="telefono" type="number" onkeypress="if (event.keyCode< 48 || event.keyCode > 57) event.returnValue = false;">
+			    		    <p class="help-block" id="simno">Cargando...</p>
+			    		</div>
+			    		
+						<div class="form-group">
+							<label style="color: red">*</label><label for="municipio" class="select">Municipio:</label>
+							<select class="form-control" name="municipio" id="municipio">
+								<option value="">Seleccione...</option>
+							</select>
+						</div>
+						
+			    		<div class="form-group">
+			    			<label style="color: red">*</label><label for="direccion" class="select">Dirección:</label>
+			    		    <input class="form-control" placeholder="Dirección" id="direccion" name="direccion" type="text">
+			    		</div>
+			    	  	<div class="form-group">
+			    	  		<label for="email" class="select">E-mail:</label>
+			    		    <input class="form-control" placeholder="E-mail" id="email" name="email" type="email">
+			    		</div>
+			    		<input class="btn btn-md btn-success btn-block" type="button" value="Registrarse" id="btn_registro">
+			    	</fieldset>
+			      	</form>
+			    </div>
+			</div>
+		</div>
+	</div>
+</div>
+  </div>
+<script src="js/registro.js"></script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame 
+       Remove this if you use the .htaccess -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>index</title>
+  <meta name="description" content="">
+  <meta name="author" content="skaphe">
+
+  <meta name="viewport" content="initial-scale=1.0">
+
+  <!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="bootstrap-3.3/css/bootstrap.min.css">
+<!-- Optional theme -->
+<link rel="stylesheet" href="bootstrap-3.3/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="css/registro.css">
+<link rel="stylesheet" href="css/animate.css">
+<style>
+	#btn_Iniciar {
+		margin-top: -7px;
+	}
+</style>
+<script src="js/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="bootstrap-3.3/js/bootstrap.min.js"></script>
+<script src="bootstrap-growl-master/bootstrap-growl.min.js"></script>
+<script src="js/bootbox.min.js"></script>
+
+<!--INICIO	CORDOVA		-->	
+	<script type="text/javascript" src="cordova.js"></script>
+<!--FIN	CORDOVA		-->
+</head>
+
+<body>
+  <div>
+
+<div class="container">
+    <div class="row vertical-offset-100">
+    	<div class="col-md-4 col-md-offset-4">
+    		<div class="panel panel-default">
+			  	<div class="panel-heading">
+			  		<a href="registro.html" class="btn btn-sm btn-success pull-right" type="button" id="btn_Iniciar">Registro</a>
+			    	<h3 class="panel-title">INGRESO</h3>
+			 	</div>
+			  	<div class="panel-body">
+			    	<form accept-charset="UTF-8" role="form">
+                    <fieldset>
+			    		<div class="form-group">
+			    		    <input class="form-control" placeholder="Cédula" id="cc" name="cc" type="text" >
+			    		    <p class="help-block" id="simno">Cargando...</p>
+			    		</div>
+			    		<input class="btn btn-md btn-success btn-block" type="button" value="Ingresar" id="btn_ingresar">
+			    	</fieldset>
+			      	</form>
+			    </div>
+			</div>
+		</div>
+	</div>
+</div>
+  </div>
+<script src="js/login.js"></script>
+</body>
+</html>
