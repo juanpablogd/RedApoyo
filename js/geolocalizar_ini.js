@@ -6,7 +6,7 @@ var heading;
 var timestamp;
 var watchID = null;
 //var options = { timeout: 20000, enableHighAccuracy: true };
-var options = { maximumAge: 6000*1, timeout: 10000, enableHighAccuracy: true }; //timeout: 60000*10, enableHighAccuracy: true };
+var options = { maximumAge: 1000*60, timeout: 1000*5, enableHighAccuracy: true }; //timeout: 60000*10, enableHighAccuracy: true };
 
 var success = function(pos) {
 	 myLatitud = pos.coords.latitude;
@@ -21,7 +21,7 @@ var success = function(pos) {
 };
 
 var failw = function(error) {
-	console.log("Error Latitud: " + myLatitud);
+	console.log("Error - Latitud Anterior: " + myLatitud);
 	if (myLatitud===undefined || myLatitud=="undefined"){myLatitud="";}
 	if (myLongitud===undefined || myLongitud=="undefined"){myLongitud="";}
 	if (myPrecision===undefined || myPrecision=="undefined"){myPrecision="";}
@@ -33,5 +33,5 @@ navigator.geolocation.getCurrentPosition(success, failw, options);
 setInterval(function(){ 
 		console.log("Busca Ubicación"); 
 		navigator.geolocation.getCurrentPosition(success, failw, options);
-}, 1000*60*2);
+}, 1000*30);
 //watchID = navigator.geolocation.watchPosition(success, failw, options);
