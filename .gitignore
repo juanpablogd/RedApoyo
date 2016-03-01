@@ -8,6 +8,13 @@ Desktop.ini
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
 
+# Proyecto Cordova JP
+cordova.js
+cordova_plugins.js
+deviceinformation.js
+plugins/
+cordova-js-src/
+
 # Windows Installer files
 *.cab
 *.msi
