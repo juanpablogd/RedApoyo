@@ -16,8 +16,9 @@ var success = function(pos) {
 	 heading = pos.coords.heading;	if(heading == null) heading = "";		 	//text = "<div>Latitude: " + myLatitud + "<br/>" + "Longitude: " + myLongitud + "<br/>" + "Accuracy: " + myPrecision + " m<br/>" + "</div>";
 	 timestamp = new Date(pos.timestamp);	timestamp = timestamp.format("yyyy-mm-dd HH:mm:ss");	//text = "<div>Latitud: " + myLatitud + "<br/>" + "Longitud: " + myLongitud + "<br/>" + "Precisi&oacute;n: " + myPrecision + " m <br/>Fecha: "+ timestamp +" <br/>" + "</div>";
 	 $("#tab_geo").removeClass("btn-danger");
-	 $("#tab_geo").addClass("btn-success"); 
-	 console.log("Ubicación exitosa");	 
+	 $("#tab_geo").addClass("btn-success");
+	 $("#alerta_ubicacion").hide(); 
+	 console.log("Ubicación exitosa: " + myLatitud + " " + myLongitud);	 
 };
 
 var failw = function(error) {
@@ -25,7 +26,9 @@ var failw = function(error) {
 	if (myLatitud===undefined || myLatitud=="undefined"){myLatitud="";}
 	if (myLongitud===undefined || myLongitud=="undefined"){myLongitud="";}
 	if (myPrecision===undefined || myPrecision=="undefined"){myPrecision="";}
-	msj_peligro("No hay Ubicación, Revise su GPS");
+	 $("#tab_geo").removeClass("btn-success");
+	 $("#tab_geo").addClass("btn-danger");
+ 	$("#alerta_ubicacion").show();
 };
 
 navigator.geolocation.getCurrentPosition(success, failw, options);
@@ -33,5 +36,5 @@ navigator.geolocation.getCurrentPosition(success, failw, options);
 setInterval(function(){ 
 		console.log("Busca Ubicación"); 
 		navigator.geolocation.getCurrentPosition(success, failw, options);
-}, 1000*30);
+}, 1000*20);
 //watchID = navigator.geolocation.watchPosition(success, failw, options);
