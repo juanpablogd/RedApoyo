@@ -65,7 +65,7 @@ function Resp_activacion(tx, results) {
 			$("#email").val(results.rows.item(0).email);
 			$("#direccion").val(results.rows.item(0).direccion);
 	
-			socket.emit('getsms', {clave:clave,telefono:results.rows.item(0).telefono,id:results.rows.item(0).id});
+			//socket.emit('getsms', {clave:clave,telefono:results.rows.item(0).telefono,id:results.rows.item(0).id});	SOLICITA UN MSJ SMS PARA LA ACTIVACIÓN
 			msj_exitoso("Espere Llamada de Confirmación Por Favor!");
 			//console.log("pedir mensaje");
 			//Petición para envío de sms

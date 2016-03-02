@@ -34,11 +34,6 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         console.log('deviceready');
-		var smsInput_success = function () { alert(result); };
-        var smsInput_error = function (error) {  alert(error);   };
-        
-        smsplugin.startReception(smsInput_error,smsInput_success);
-        //alert('deviceready');
     }
 };
 app.initialize();

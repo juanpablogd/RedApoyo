@@ -73,10 +73,9 @@ function restar(){ 						console.log(activo);
 				var id_unico = fecha_creacion+'-'+localStorage.id;
 				var conexion = checkConnection(); 					console.log(conexion);
 				if(conexion=="SinRed" || conexion=="ConnexionDesconocida"){
-					var sms_success = function () { msj_exitoso("SMS Enviado Exitosamente"); };
-		            var sms_error = function (error) {	msj_peligro("Mensaje No enviado: " + error); llamar("123+");	}; 
-		            var intent = "";
-					smsplugin.send("3212481549",fecha_creacion+"@"+"BP"+"@"+myLatitud+"@"+myLongitud+"@"+myPrecision+"@"+localStorage.id+"@3@1", sms_error, sms_success);
+		            msj_peligro("Sin conexión de red ó desconocida: " + error);
+		            msj_exitoso("Llamando al 123 de la Policía!"); 
+		            llamar("123+"); 
 				}else{
 					var parametros = new Object();
 					parametros['fecha_creacion'] = fecha_creacion;

@@ -9,6 +9,7 @@ Desktop.ini
 $RECYCLE.BIN/
 
 # Proyecto Cordova JP
+config.xml
 cordova.js
 cordova_plugins.js
 deviceinformation.js
