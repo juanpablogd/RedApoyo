@@ -35,6 +35,7 @@ var app = {
     onDeviceReady: function() {
         console.log('deviceready');
         StatusBar.overlaysWebView(false);
+        navigator.geolocation.getCurrentPosition(success, failw, options);
     }
 };
 app.initialize();

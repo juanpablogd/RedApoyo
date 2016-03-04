@@ -44,6 +44,27 @@ function errorCB(err) {
    	}
 }
 
+// This function is used to get error message for all ajax calls
+function getErrorMessage(jqXHR, exception) {
+    var msg = '';
+    if (jqXHR.status === 0) {
+        msg = 'Señal Baja o Nula.\n Verifique la Red.';
+    } else if (jqXHR.status == 404) {
+        msg = 'Servicio No encontrado. [404]';
+    } else if (jqXHR.status == 500) {
+        msg = 'Error interno del servidor [500].';
+    } else if (exception === 'parsererror') {
+        msg = 'La solicitud falló.';				//parsererror
+    } else if (exception === 'timeout') {
+        msg = 'Tiempo agotado de espera.';			//timeout
+    } else if (exception === 'abort') {
+        msg = 'Solicitud Abortada.';				//abort
+    } else {
+        msg = 'Error: \n' + jqXHR.responseText;
+    }
+    msj_peligro(msg);
+}
+
 /* VERIFICA SI YA EXISTE REGISTRO DE ALGÚN USUARIO Y SI YA ESTÁ ACTIVADO O NO*/
 function activacion(tx) {	//console.log('SELECT nombres,apellidos,cedula,telefono,direccion,email,clave,activo FROM registro');
 	tx.executeSql('SELECT nombres,apellidos,cedula,telefono,direccion,email,serial,clave,activo,id FROM registro', [],Resp_activacion, errorCB);
@@ -106,9 +127,10 @@ function Resp_activacion(tx, results) {
 								
 							}
 						},
-						error: function (error) {
-							msj_peligro("Error al conectarse al servidor, revise su conexión a Internet");
-					    }
+						error: function (jqXHR, exception) {
+				            console.log(jqXHR);
+				            getErrorMessage(jqXHR, exception);
+				        }
 					});  
 
     	}else{	//SI YA EXISTE EL REGISTRO Y LA ACTIVACIÓN INGRESA AUTOMATICAMANTE A LA APLICACION 

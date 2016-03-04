@@ -38,6 +38,7 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         console.log('deviceready');
+        StatusBar.overlaysWebView(false);
     }
 };
 app.initialize();

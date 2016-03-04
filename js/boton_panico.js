@@ -38,15 +38,13 @@ function activar(){
 }
 
 function llamar(num){
-	phonedialer.dial(
-			  num, 
-			  function(err) {
-			    if (err == "empty") alert("Número desconocido");
-			    else alert("Error llamada:" + err);    
-			  },
-			  function(success) { //alert('Dialing succeeded'); 
-			  }
-			);
+	window.PhoneCaller.call(num,
+		function(success) { //alert('Dialing succeeded'); 
+		},
+		function(err) {
+		    if (err == "empty") msj_peligro("Número desconocido");
+		    else msj_peligro("Error llamada:" + err);        
+		});
 }
     
 function desactivar(){
