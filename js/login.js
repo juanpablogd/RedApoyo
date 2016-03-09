@@ -1,8 +1,5 @@
 //------------------------------------------------DOCUMENTO LISTO------------------------------------------------
 $(document).ready(function(){
-	//DEFINICIÓN DE VARIABLES
-	var imei,serial,marca,operador,fecha_captura,clave;
-	var id,cedula,nombres,apellidos,telefono,email,direccion;
 	
 //INICIO BASE DE DATOS------------------------------------------------BASE DE DATOS------------------------------------------------
 	var db = window.openDatabase("bdpolimovil", "1.0", "Proyecto Cliente", 33554432);
@@ -73,46 +70,7 @@ $(document).ready(function(){
 		}); 
 
 	}
-//FIN BASE DE DATOS------------------------------------------------BASE DE DATOS------------------------------------------------
-	
-	var app = {
-		    // Application Constructor
-		    initialize: function() {
-		        this.bindEvents();
-		    },
-		    // Bind Event Listeners // Bind any events that are required on startup. Common events are: // 'load', 'deviceready', 'offline', and 'online'.
-		    bindEvents: function() {
-		        document.addEventListener('deviceready', this.onDeviceReady, false);
-		    },
-		    // deviceready Event Handler
-		    // The scope of 'this' is the event. In order to call the 'receivedEvent'
-		    // function, we must explicity call 'app.receivedEvent(...);'
-		    onDeviceReady: function() {
-		        console.log('deviceready');
-				var deviceInfo = cordova.require("cordova/plugin/DeviceInformation");
-				deviceInfo.get(function(result) { //alert (result);
-					//Obtiene el Número de SIM
-					var res = result.split("simNo");
-					res = res[1].split('"');	//alert (res[2]);
-					$("#simno").html("SIM: " + res[2]);
-					serial = res[2]; //alert("SIM / Serial: "+serial);
-					//Obtiene el IMEI
-					res = result.split("deviceID");
-					res = res[1].split('"');
-					//$("#simno").html("SIM: " + res[1]);
-					imei = res[2]; //alert("Imei: "+imei);
-					//Obtiene el IMEI
-					res = result.split("netName");
-					res = res[1].split('"');
-					operador = res[2]; //alert("Operador: "+operador);	
-	
-				}, function() {
-					console.log("error");
-				});
-		    }
-		};
-
-	app.initialize();
+//FIN BASE DE DATOS------------------------------------------------BASE DE DATOS-----------------------------------------------
 
 	function msj_peligro(msj){
 		$.growl(msj, { 
@@ -133,16 +91,18 @@ $(document).ready(function(){
 //------ENVIAR REGISTRO------//
 	$("#btn_ingresar").click(function() {
 
-		var cc = $("#cc").val().trim(); //alert(cc);
+		var cc = $("#cc").val().trim();
 		//___FECHA
 		var now = new Date();	var fecha_captura = now.getFullYear()+'-'+(1+now.getMonth())+'-'+now.getDate()+'-'+now.getHours()+'_'+now.getMinutes()+'_'+now.getSeconds();
-
 		if(cc == ""){
 			msj_peligro("Digite Cédula");
 			$("#cc").focus();
 			return false;
 		}
-	
+        if(device.platform == "iOS"){
+	        serial = cc;
+	        imei = cc;
+        }	
 		var parametros = new Object();
 			parametros['tabla'] = 'login';
 			parametros['cedula'] = cc;
@@ -153,7 +113,7 @@ $(document).ready(function(){
 			parametros['operador'] = operador;	console.log(parametros);
 			
 		$.ajax({
-			data:  parametros,																//url:'http://'+localStorage.url_servidor+'/SIG/servicios/m123/m123_sincronizar.php',
+			data:  parametros,
 			url:'http://'+localStorage.url_servidor+'/SIG/servicios/m123/m123_login.php',
 			type:  'post',
 			async: false,		//timeout: 30000,

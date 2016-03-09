@@ -41,7 +41,7 @@ function errorCB(err) {
 	if (err.code !== undefined && err.message !== undefined){
     	alert("Error procesando SQL: Codigo: " + err.code + " Mensaje: "+err.message);
    	}else{
-   		window.location = "registro.html"; 
+   		window.location = "login.html"; 
    	}
 }
 
@@ -62,7 +62,7 @@ function Resp_EstadoRegistro(tx, results) {
 			 	if(id == "" || id === undefined){window.location = "index.html";}	
     	}
 	}else{	//SI NO HAY NADIE REGISTRADO - DIRECCIONA A REGISTRO	
-		window.location = "registro.html";
+		window.location = "login.html";
 	}
 }
 

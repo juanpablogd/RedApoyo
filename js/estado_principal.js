@@ -7,8 +7,10 @@ function errorCB(err) {
 	if (err.code !== undefined && err.message !== undefined){
     	alert("Error procesando SQL: Codigo: " + err.code + " Mensaje: "+err.message);
    	}else{
-		if (localStorage.terminos != "1"){
+		if (localStorage.terminos != "1"){ 
 			window.location = "terminos.html";
+		}else {
+			window.location = "login.html";
 		}
    	}
 }
@@ -19,20 +21,18 @@ function EstadoRegistro(tx) {
 }
 function Resp_EstadoRegistro(tx, results) {
 	//NÚMERO DE REGISTROS
-    var len = results.rows.length;					
+    var len = results.rows.length;	//console.log("Registros encontrados: " + len);
     if(len>0){ 
     	var activo = results.rows.item(0).activo; //console.log(clave);
-    	//SI LA CLAVE ES NULA QUIERE DECIR QUE NO SE ENCUENTRA ACTIVO
+    	//SI LA CLAVE ES NULA QUIERE DECIR QUE NO SE ENCUENTRA ACTIVO, DE LO CONTRARIO CONTINUA EN LA APLICACIÓN
     	if(activo == "N"){		
     		window.location = "activacion.html";
-    	}else{	//SI YA EXISTE EL REGISTRO Y LA ACTIVACIÓN INGRESA AUTOMATICAMANTE A LA APLICACION 
-				var id = results.rows.item(0).id;
-				localStorage.id = id;
-				window.location = "principal.html";
     	}
-	}else{	//SI NO HAY NADIE REGISTRADO Y NO HA ACEPTADO LOS TERMINOS, CONTINUA EN LA MISMA PÁG
-		if (localStorage.terminos != "1"){
+	}else{	//SI NO HAY NADIE REGISTRADO - DIRECCIONA A REGISTRO	
+		if (localStorage.terminos != "1"){ 
 			window.location = "terminos.html";
+		}else {
+			window.location = "login.html";
 		}
 	}
 }

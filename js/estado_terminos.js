@@ -9,7 +9,7 @@ function errorCB(err) {
    	}else{
    		//alert("Error procesando SQL: Codigo: " + localStorage.terminos + " Mensaje: "+err.message);
    		if (localStorage.terminos == "1") { 
-   			window.location = "registro.html";
+   			top.location = "login.html";
    		}
    	}
 }
@@ -25,21 +25,15 @@ function Resp_EstadoRegistro(tx, results) {
     	var activo = results.rows.item(0).activo; //console.log(clave);
     	//SI LA CLAVE ES NULA QUIERE DECIR QUE NO SE ENCUENTRA ACTIVO
     	if(activo == "N"){		
-    		window.location = "activacion.html";
+    		top.location = "activacion.html";
     	}else{	//SI YA EXISTE EL REGISTRO Y LA ACTIVACIÓN INGRESA AUTOMATICAMANTE A LA APLICACION 
 				var id = results.rows.item(0).id;			//var nombre = results.rows.item(0).nombre;
-/*				if (id != ""){		*/	
-				 	localStorage.id = id;
-				 	window.location = "principal.html";
-/*				}else{
-					window.location = "registro.html"; 
-				}*/	
-    	}
-	}else{	//SI NO HAY NADIE REGISTRADO - DIRECCIONA A REGISTRO	
+				localStorage.id = id;
+				top.location = "principal.html";
+	   	}
+	}else{	//SI NO HAY NADIE REGISTRADO - DIRECCIONA AL LOGIN, DE LO CONTRARIO SIGUE EN LA PÁGINA ACTUAL
    		if (localStorage.terminos == "1") { 
-   			window.location = "registro.html";
-   		}else{
-   			window.location = "terminos.html";
+   			top.location = "login.html";
    		}
 	}
 }
@@ -48,13 +42,11 @@ db.transaction(EstadoRegistro);
 
 $( document ).ready(function() {
 	$("#btn_aceptar").click(function(){
-			//alert("a");
-			localStorage.terminos = "1";
-			window.location = "registro.html";
+		localStorage.terminos = "1";
+		top.location = "login.html";
 	});
 	
 	$("#btn_salir").click(function(){
-		//alert("s");
 		navigator.app.exitApp();
 	});
 });

@@ -2,9 +2,6 @@
 $(document).ready(function(){
 
 	if (localStorage.url_servidor == "" || localStorage.url_servidor === undefined) window.location = "index.html";
-	
-	//DEFINICIÓN DE VARIABLES
-	var imei,serial,marca,operador,fecha_captura,clave,id_pa_asignacion_equipo;
 
 	function validarEntero(valor) {
         //intento convertir a entero. 
@@ -103,45 +100,6 @@ $(document).ready(function(){
 
 	}
 //FIN BASE DE DATOS------------------------------------------------BASE DE DATOS------------------------------------------------
-	
-var app = {
-	    // Application Constructor
-	    initialize: function() {
-	        this.bindEvents();
-	    },
-	    // Bind Event Listeners // Bind any events that are required on startup. Common events are: // 'load', 'deviceready', 'offline', and 'online'.
-	    bindEvents: function() {
-	        document.addEventListener('deviceready', this.onDeviceReady, false);
-	    },
-	    // deviceready Event Handler
-	    // The scope of 'this' is the event. In order to call the 'receivedEvent'
-	    // function, we must explicity call 'app.receivedEvent(...);'
-	    onDeviceReady: function() {
-	        console.log('deviceready');
-			var deviceInfo = cordova.require("cordova/plugin/DeviceInformation");
-				deviceInfo.get(function(result) { //alert (result);
-					//Obtiene el Número de SIM
-					var res = result.split("simNo");
-					res = res[1].split('"');	//alert (res[2]);
-					$("#simno").html("SIM: " + res[2]);
-					serial = res[2]; //alert("SIM / Serial: "+serial);
-					//Obtiene el IMEI
-					res = result.split("deviceID");
-					res = res[1].split('"');
-					//$("#simno").html("SIM: " + res[1]);
-					imei = res[2]; //alert("Imei: "+imei);
-					//Obtiene el IMEI
-					res = result.split("netName");
-					res = res[1].split('"');
-					operador = res[2]; //alert("Operador: "+operador);	
-	
-				}, function() {
-					console.log("error");
-				});
-	    }
-	};
-
-	app.initialize();
 
 	function msj_peligro(msj){
 		$.growl(msj, { 
@@ -213,8 +171,8 @@ var app = {
 			parametros['operador'] = operador;
 			
 			$.ajax({
-				data:  parametros,																//url:'http://'+localStorage.url_servidor+'/SIG/servicios/m123/m123_sincronizar.php',
-				url:'http://'+localStorage.url_servidor+'/SIG/servicios/m123/m123_sincronizar.php',
+				data:  parametros,
+                url:'http://'+localStorage.url_servidor+'/SIG/servicios/m123/m123_sincronizar.php',
 				type:  'post',
 				async: false,		//timeout: 30000,
 				success: function(responsef){	console.log("Resp SRV:" + responsef); //alert(responsef);

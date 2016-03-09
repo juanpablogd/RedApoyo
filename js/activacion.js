@@ -40,7 +40,7 @@ function errorCB(err) {
 	if (err.code !== undefined && err.message !== undefined){
     	alert("Error procesando SQL: Codigo: " + err.code + " Mensaje: "+err.message);
    	}else{
-   		window.location = "registro.html"; 
+   		window.location = "login.html"; 
    	}
 }
 
@@ -124,7 +124,6 @@ function Resp_activacion(tx, results) {
 								}else if(reps == 2){
 									msj_peligro("Activación No autorizada, Cree un Registro en el Botón 'Nuevo Usuario'");
 								}
-								
 							}
 						},
 						error: function (jqXHR, exception) {
@@ -136,8 +135,8 @@ function Resp_activacion(tx, results) {
     	}else{	//SI YA EXISTE EL REGISTRO Y LA ACTIVACIÓN INGRESA AUTOMATICAMANTE A LA APLICACION 
 			window.location = "principal.html";
     	}
-	}else{	//SI NO HAY NADIE REGISTRADO - DIRECCIONA A REGISTRO	
-		window.location = "registro.html";
+	}else{	//SI NO HAY NADIE REGISTRADO - DIRECCIONA A TERMINOS	
+		window.location = "terminos.html";
 	}
 }
 
@@ -145,7 +144,7 @@ function RegError(){
 	msj_peligro("Error al eliminar el Registro");
 }
 function RegOk(){
-	window.location = "registro.html";
+	window.location = "login.html";
 }
 //Elimina todo registro del sistema
 function NuevoRegistro(tx) {
