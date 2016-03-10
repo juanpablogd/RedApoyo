@@ -62,7 +62,7 @@ function restar(){ 						console.log(activo);
 	if(activo==true){
 		seg = seg - 1;
 		$("#boton_txt").html(seg);
-	    if(seg == 0){
+	    if(seg <= 0){
 	    	desactivar();
 	    	if(myLatitud != "" && myLongitud != ""){
 	    		//ENVIO DE ALERTA AL SERVIDOR	//ENVIO DE ALERTA AL SERVIDOR

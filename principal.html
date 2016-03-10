@@ -43,7 +43,7 @@
 	}
 	
 	#panel_btn_auxilio {
-	  height: 250px !important;
+	  /*	height: 250px !important; */
 	}
 	#tab_geo{
 		margin-top: 10px !important;
@@ -81,6 +81,7 @@
 	}
 	#btn_cancelar{
 		width: 100% !important;
+		top: -15px;
 	}
 	.panel-heading {
     	padding: 1px 15px !important;
@@ -94,6 +95,10 @@
 	    position: fixed;
 	    bottom: 0;
 	    width: 100%;
+	}
+	
+	#boton_panico {
+	    top: -15px !important;
 	}
 </style>
 <script src="js/jquery.min.js"></script>
@@ -121,7 +126,7 @@
             </ul>
         </span>
     </div>
-<div class="panel-body" style="display: none">
+<div class="panel-body" >
 	<div align="center" id="alerta_ubicacion">
 		<h4 id="sinGps_H4"><span class="label label-danger"><span class="glyphicon glyphicon-map-marker blanco"></span> Sin Ubicación, Revise su GPS</span></h4>
 	</div>
@@ -146,7 +151,7 @@
 				</div>
 			<!--  GEOMETRIA FIN-->
 		</div>		
-		<div class="tab-pane fade in" id="tab_form">
+		<div class="tab-pane fade in" id="tab_form" style="display: none">
 			<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -185,7 +190,7 @@
 			</div>
 		</div>
 		
-		<div class="tab-pane fade in" id="tab_ayuda">
+		<div class="tab-pane fade in" id="tab_ayuda" style="display: none">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
