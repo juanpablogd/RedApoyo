@@ -40,28 +40,19 @@ onDeviceReady: function() {
                        operador = res[2]; //alert("Operador: "+operador);
                        
                        }, function() {
-                       console.log("error");
+                       		console.log("Error: " + error);
                        });
     } else if(device.platform == "iOS"){
+    	$("#simno").html("");
         window.plugins.sim.getSimInfo(Sim_ok, Sim_error);
-        window.plugins.uniqueDeviceID.get(id_ok, id_error);
     }else {
         msj_peligro("No se encontró plataforma de desarrollo.");
     }
     function Sim_ok(result) {
         operador = result.carrierName;
-        $("#simno").html("SIM: " + serial);
     }
     function Sim_error(error) {
         msj_peligro("Error equipo SIM - iOS: " + error);
-    }
-    function id_ok(uuid) {
-        serial = uuid;
-        imei = uuid;
-        $("#simno").html("ID: " + serial);
-    }
-    function id_error(error) {
-        msj_peligro("Error equipo ID - iOS: " + error);
     }
 }
 };

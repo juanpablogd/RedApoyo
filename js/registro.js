@@ -22,13 +22,71 @@ $(document).ready(function(){
 		var vr = validarEntero($(this).val());
 		$(this).val(vr);
 	});
+	
+	function setMunicipio(id,nom){
+		console.log(id + ' ' + nom);
+		$('#municipio').attr("valor",id);
+		$('#municipio').html('Municipio: '+nom);
+	}
 
  	//CARGA MUNICIPIOS
 	$.getJSON( "json/municipios.json", function( data ) {
 	  var items = [];
 	  $.each( data, function( key, val ) {
-	  	$('#municipio').append('<option value="'+val.codigo_mun+'" >'+val.nombre_mun+'</option>');		//items.push( "<li id='" + key + "'>" + val + "</li>" );
+	  	$('#table_mpio > tbody').append('<tr id="'+val.codigo_mun+'"><td>'+val.nombre_mun+'</td></tr>');
 	  });
+      $( '#table_mpio' ).searchable({
+      		searchField   : '#busca_mpio',
+	        oddRow: { 'background-color': '#f5f5f5' },
+	        evenRow: { 'background-color': '#fff' },
+		    searchType    : 'fuzzy',
+            show: function (elem) {
+            	//console.log("SHOW buscar");
+                elem.slideDown(100);
+                var selec = $('#table_mpio > tbody > tr:visible');
+                var num_reg = selec.length;
+                if(num_reg == 1){
+                	var id_reg = selec.attr('id');
+                	var nom_reg  = "";
+                	selec.find('td').each (function() {
+						nom_reg = $(this).html();
+					});   
+                	setMunicipio(id_reg,nom_reg);
+                }
+            },
+            hide: function (elem) {
+            	//console.log("HIDE buscar");
+                elem.slideUp(100);
+                var selec = $('#table_mpio > tbody > tr:visible');
+                var num_reg = selec.length;
+                if(num_reg == 1){
+                	var id_reg = selec.attr('id');
+                	var nom_reg  = "";
+                	selec.find('td').each (function() {
+						nom_reg = $(this).html();
+					});   
+                	setMunicipio(id_reg,nom_reg);
+                }
+            },
+		    onSearchActive : function( elem, term ) {
+		    	//console.log("onSearchActive buscar");
+		        elem.show();
+		    },
+		    onSearchEmpty: function( elem ) {
+		    	//console.log("onSearchEmptyActive buscar");
+		        elem.hide();
+		    },
+    		clearOnLoad: true
+	    });
+	    
+	    $("#table_mpio > tbody > tr").click(function() {
+        	var id_reg = $( this ).attr('id');
+        	var nom_reg  = "";
+        	$( this ).find('td').each (function() {
+				nom_reg = $(this).html();
+			});   
+        	setMunicipio(id_reg,nom_reg);
+		});
 	});
 	
 //INICIO BASE DE DATOS------------------------------------------------BASE DE DATOS------------------------------------------------
@@ -54,7 +112,7 @@ $(document).ready(function(){
 	
 	/* LOGUEADO LOCALMENTE EN EL MOVIL*/
 	function Registro(tx) {
-		var cedula = $("#cedula").val().trim();								console.log('SELECT clave FROM registro where cedula = "'+cedula+'"');
+		var cedula = $("#cedula").val().trim();		console.log('SELECT clave FROM registro where cedula = "'+cedula+'"');
 		tx.executeSql('SELECT cedula FROM registro where cedula = "'+cedula+'"', [],MuestraItems, errorCB);
 	}
 	/* LOGUEADO LOCALMENTE EN EL MOVIL*/
@@ -66,21 +124,27 @@ $(document).ready(function(){
 		var telefono = $("#telefono").val().trim();
 		var email = $("#email").val().trim();
 		var direccion = $("#direccion").val().trim();
+		console.log(serial + " " + imei);
 		if(imei === undefined ) imei = "";
 		if(serial === undefined ) serial = "";
 		if(marca === undefined ) marca = "";
 		if(operador === undefined ) operador = "";
+		
+        if(imei == null || imei == "" || imei === undefined){
+	        serial = cedula;
+	        imei = cedula;
+        }	
 		//___FECHA
 		var now = new Date();	var fecha_captura = now.getFullYear()+'-'+(1+now.getMonth())+'-'+now.getDate()+'-'+now.getHours()+'_'+now.getMinutes()+'_'+now.getSeconds();
 
 		//NÚMERO DE REGISTROS
 	    var len = results.rows.length;					
-	    if(len==0){		//console.log('INSERT INTO registro (nombres,apellidos,cedula,telefono,email,direccion,imei,serial,marca,operador,fecha_hora,clave,activo) values ("'+nombres+'","'+apellidos+'","'+cedula+'","'+telefono+'","'+email+'","'+direccion+'","'+imei+'","'+serial+'","'+marca+'","'+operador+'","'+fecha_captura+'","'+clave+'","N","'+id_pa_asignacion_equipo+'");');
-	    	tx.executeSql('DELETE FROM registro');
-			tx.executeSql('INSERT INTO registro (nombres,apellidos,cedula,telefono,email,direccion,imei,serial,marca,operador,fecha_hora,clave,activo,id) values ("'+nombres+'","'+apellidos+'","'+cedula+'","'+telefono+'","'+email+'","'+direccion+'","'+imei+'","'+serial+'","'+marca+'","'+operador+'","'+fecha_captura+'","'+clave+'","N","'+id_pa_asignacion_equipo+'");'); //
-		}else{											
-			var cedula = results.rows.item(0).cedula;	//console.log('UPDATE registro set nombres="'+nombres+'",apellidos="'+apellidos+'",cedula="'+cedula+'",telefono="'+telefono+'",email="'+email+'",imei="'+imei+'",serial="'+serial+'",marca="'+marca+'",operador="'+operador+'",fecha_hora="'+fecha_captura+'",id="'+id_pa_asignacion_equipo+'" where cedula = "'+cedula+'"');
-			tx.executeSql('UPDATE registro set nombres="'+nombres+'",apellidos="'+apellidos+'",cedula="'+cedula+'",telefono="'+telefono+'",email="'+email+'",direccion="'+direccion+'",imei="'+imei+'",serial="'+serial+'",marca="'+marca+'",operador="'+operador+'",clave="'+clave+'",fecha_hora="'+fecha_captura+'",id="'+id_pa_asignacion_equipo+'" where cedula = "'+cedula+'"');
+	    if(len==0){ //console.log('INSERT INTO registro (nombres,apellidos,cedula,telefono,email,direccion,imei,serial,marca,operador,fecha_hora,clave,activo) values ("'+nombres+'","'+apellidos+'","'+cedula+'","'+telefono+'","'+email+'","'+direccion+'","'+imei+'","'+serial+'","'+marca+'","'+operador+'","'+fecha_captura+'","'+clave+'","N","'+id_pa_asignacion_equipo+'");');
+	    		tx.executeSql('DELETE FROM registro');
+				tx.executeSql('INSERT INTO registro (nombres,apellidos,cedula,telefono,email,direccion,imei,serial,marca,operador,fecha_hora,clave,activo,id) values ("'+nombres+'","'+apellidos+'","'+cedula+'","'+telefono+'","'+email+'","'+direccion+'","'+imei+'","'+serial+'","'+marca+'","'+operador+'","'+fecha_captura+'","'+clave+'","N","'+id_pa_asignacion_equipo+'");'); //
+		}else{  //console.log('UPDATE registro set nombres="'+nombres+'",apellidos="'+apellidos+'",cedula="'+cedula+'",telefono="'+telefono+'",email="'+email+'",direccion="'+direccion+'",imei="'+imei+'",serial="'+serial+'",marca="'+marca+'",operador="'+operador+'",clave="'+clave+'",fecha_hora="'+fecha_captura+'",id="'+id_pa_asignacion_equipo+'" where cedula = "'+cedula+'"');	
+			  	var cedula = results.rows.item(0).cedula;	
+				tx.executeSql('UPDATE registro set nombres="'+nombres+'",apellidos="'+apellidos+'",cedula="'+cedula+'",telefono="'+telefono+'",email="'+email+'",direccion="'+direccion+'",imei="'+imei+'",serial="'+serial+'",marca="'+marca+'",operador="'+operador+'",clave="'+clave+'",fecha_hora="'+fecha_captura+'",id="'+id_pa_asignacion_equipo+'" where cedula = "'+cedula+'"');
 	    }
 		
 		bootbox.dialog({
@@ -119,13 +183,15 @@ $(document).ready(function(){
 	
 //------ENVIAR REGISTRO------//
 	$("#btn_registro").click(function() {
-		var nombres = $("#nombres").val().trim(); console.log(nombres);
+		$("#busca_mpio").val('');
+		var nombres = $("#nombres").val().trim(); //console.log(nombres);
 		var apellidos = $("#apellidos").val().trim();
 		var cedula = $("#cedula").val().trim();
 		var telefono = $("#telefono").val().trim();
 		var email = $("#email").val().trim();
-		var municipio = $("#municipio").val(); console.log(municipio);
 		var direccion = $("#direccion").val().trim();
+		var municipio = $("#municipio").attr('valor'); console.log("Mpio: "+ municipio); 
+		
 		//___FECHA
 		var now = new Date();	var fecha_captura = now.getFullYear()+'-'+(1+now.getMonth())+'-'+now.getDate()+'-'+now.getHours()+'_'+now.getMinutes()+'_'+now.getSeconds();
 
@@ -145,16 +211,20 @@ $(document).ready(function(){
 			msj_peligro("Digite Teléfono");
 			$("#telefono").focus();
 			return false;
-		}if(municipio == ""){
-			msj_peligro("Selecccione el Municipio");
-			$("#municipio").focus();
-			return false;
 		}if(direccion == ""){
 			msj_peligro("Digite la Dirección");
 			$("#direccion").focus();
 			return false;
+		}if(municipio == ""){
+			msj_peligro("Selecccione el Municipio");
+			$("#municipio").focus();
+			return false;
 		}
-	
+		console.log(serial + " " + imei);
+        if(imei == null || imei == "" || imei === undefined){
+	        serial = cedula;
+	        imei = cedula;
+        }	
 		var parametros = new Object();
 			parametros['tabla'] = 'registro';
 			parametros['nombres'] = nombres;
@@ -175,7 +245,7 @@ $(document).ready(function(){
                 url:'http://'+localStorage.url_servidor+'/SIG/servicios/m123/m123_sincronizar.php',
 				type:  'post',
 				async: false,		//timeout: 30000,
-				success: function(responsef){	console.log("Resp SRV:" + responsef); //alert(responsef);
+				success: function(responsef){	console.log("Resp SRV:" + responsef);
 					var arresp = responsef.trim().split("@");
 					id_pa_asignacion_equipo = arresp[0];	console.log("id_pa_asignacion_equipo:" + id_pa_asignacion_equipo);
 					clave = arresp[1];						console.log("Clave:" + clave);
@@ -184,7 +254,7 @@ $(document).ready(function(){
 				error: function (error) {
 					msj_peligro("Error al conectarse al servidor, revise su conexión a Internet");
 			    }
-			});
+			});	
 		
 	});	
 //------	FIN ENVÍO  DE REGISTRO------//

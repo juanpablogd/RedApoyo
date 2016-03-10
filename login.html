@@ -34,6 +34,7 @@
 <script src="js/bootbox.min.js"></script>
 
 <!--INICIO	CORDOVA		-->	
+    <script type="text/javascript" src="js/estado_registro.js"></script>
 	<script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index_login.js"></script>
 <!--FIN	CORDOVA		-->
@@ -48,12 +49,13 @@
     		<div class="panel panel-default">
 			  	<div class="panel-heading">
 			  		<a href="registro.html" class="btn btn-sm btn-success pull-right" type="button" id="btn_Iniciar">Registro</a>
-			    	<h3 class="panel-title">INGRESO</h3>
+			    	<h3 class="panel-title">INGRESAR</h3>
 			 	</div>
 			  	<div class="panel-body">
 			    	<form accept-charset="UTF-8" role="form">
                     <fieldset>
 			    		<div class="form-group">
+			    			<label style="color: red">*</label>&nbsp;<label> Documento Identidad</label>
 			    		    <input class="form-control" placeholder="Cédula" id="cc" name="cc" type="text" >
 			    		    <p class="help-block" id="simno">Cargando...</p>
 			    		</div>

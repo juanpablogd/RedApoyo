@@ -46,14 +46,10 @@ onDeviceReady: function() {
         msj_peligro("No se encontró plataforma de desarrollo.");
     }
     function successCallback(result) {
-        serial = device.uuid;
-        imei = device.uuid;
         operador = result.carrierName;
-        $("#simno").html("SIM: " + serial);
     }
-			 
     function errorCallback(error) {
-        msj_peligro("Error equipo iOS: " + error);
+        msj_peligro("Error equipo SIM - iOS: " + error);
     }
 }
 };

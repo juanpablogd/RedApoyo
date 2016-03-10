@@ -29,8 +29,15 @@
 			margin-top: -90px !important;
 		}
 		textarea.vert { resize:vertical; }
+		.table-responsive {
+		    max-height: 132px !important;
+		    border: 0px !important;
+			margin-bottom: -15px !important;
+			overflow-y: scroll !important;
+		}
 	</style>
 	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery.searchable-1.1.0.min.js"></script>
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="bootstrap-3.3/js/bootstrap.min.js"></script>
 	<script src="bootstrap-growl-master/bootstrap-growl.min.js"></script>
@@ -74,18 +81,19 @@
 			    		    <input class="form-control" placeholder="Número teléfonico" id="telefono" name="telefono" type="number" onkeypress="if (event.keyCode< 48 || event.keyCode > 57) event.returnValue = false;">
 			    		    <p class="help-block" id="simno">Cargando...</p>
 			    		</div>
-			    		
-						<div class="form-group">
-							<label style="color: red">*</label><label for="municipio" class="select">Municipio:</label>
-							<select class="form-control" name="municipio" id="municipio">
-								<option value="">Seleccione...</option>
-							</select>
-						</div>
-						
 			    		<div class="form-group">
 			    			<label style="color: red">*</label><label for="direccion" class="select">Dirección:</label>
 			    		    <input class="form-control" placeholder="Dirección" id="direccion" name="direccion" type="text">
-			    		</div>
+			    		</div>			    		
+						<div class="form-group">
+							<label style="color: red">*</label><label for="busca_mpio" class="select" id="municipio" valor="">Municipio:</label>
+						    <input type="search" id="busca_mpio" value="" class="form-control" placeholder="Buscar Municipio">
+						    <div class="table-responsive">
+								<table id="table_mpio" class="table table-striped">
+								    <tbody>&nbsp;</tbody>
+								 </table>
+							 </div>
+						</div>
 			    	  	<div class="form-group">
 			    	  		<label for="email" class="select">E-mail:</label>
 			    		    <input class="form-control" placeholder="E-mail" id="email" name="email" type="email">

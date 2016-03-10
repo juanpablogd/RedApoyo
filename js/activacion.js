@@ -108,7 +108,7 @@ function Resp_activacion(tx, results) {
 										localStorage.id = reps[1]; 
 										
 										bootbox.dialog({
-										  message: "Felicidades! activación exitosa!",
+										  message: "Felicidades! activación exitosa.",
 										  title: "123 CUNDINAMARCA",
 										  buttons: {
 										    success: {
@@ -213,5 +213,4 @@ $("#btn_activar").click(function(){
 
 
 /* Cada 5 seg REVISA EL ESTADO DEL REGISTRO AL INICIALIZAR EL APLICATIVO */
-
 setInterval(function(){db.transaction(activacion);}, 5000);
