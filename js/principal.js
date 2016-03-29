@@ -113,9 +113,9 @@ $("#btn_caso").click(function(){
 		parametros['id_unico'] = id_unico;		//alert(parametros['id_pa_asignacion_equipo']);
 		
 		$.ajax({
-			data:  parametros,
-			url:'http://'+localStorage.url_servidor+'/SIG/servicios/m123/m123_guardar_caso.php',
-			type:  'post',
+			data: parametros,
+			url:  urlcaso,
+			type: 'post',
 			async: false,		//timeout: 30000,
 			success: function(responsef){	//alert(responsef);
 				if(responsef != ""){
@@ -128,7 +128,7 @@ $("#btn_caso").click(function(){
 						db.transaction(EstadoRegistro);
 						
 					} else	{
-						msj_peligro("Caso Enviado Exitosamente");
+						msj_exitoso("Caso Enviado Exitosamente");
 					    $("#descripcion").val('');
 					}
 				}else{

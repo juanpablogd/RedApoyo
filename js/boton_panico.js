@@ -1,6 +1,8 @@
 var seg;
 var activo;
 var intervalo;
+var urlcaso = 'http://'+localStorage.url_servidor+'/SIG/servicios/m123/m123_guardar_caso_pruebas.php';
+//var url = 'http://'+localStorage.url_servidor+'/SIG/servicios/m123/m123_guardar_caso.php';
 
 $("#boton_panico").click(function(){
 	activar();
@@ -86,9 +88,9 @@ function restar(){ 						console.log(activo);
 					parametros['id_p_estado_caso'] = "1";
 					parametros['id_unico'] = id_unico;							console.log(parametros);
 						$.ajax({
-							data:  parametros,
-							url:'http://'+localStorage.url_servidor+'/SIG/servicios/m123/m123_guardar_caso.php',
-							type:  'post',
+							data: parametros,
+							url:  urlcaso,
+							type: 'post',
 							async: false,		//timeout: 30000,
 							success: function(responsef){	console.log(responsef);
 								if(responsef == "Ok"){

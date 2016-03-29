@@ -151,7 +151,7 @@
 				</div>
 			<!--  GEOMETRIA FIN-->
 		</div>		
-		<div class="tab-pane fade in" id="tab_form" style="display: none">
+		<div class="tab-pane fade in" id="tab_form">
 			<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -168,7 +168,7 @@
 								    <button type="button" id="sel_foto"  class="btn btn-primary"><span class="glyphicon glyphicon-picture"></span> Foto Galería</button>
 								  </div>
 								</div>
-								<div class="btn-group btn-group-justified">
+								<div class="btn-group btn-group-justified" style="display: none">
 								  <div class="btn-group">
 								    <button type="button" class="btn btn-primary" id="add_video"><span class="glyphicon glyphicon-facetime-video"></span> Video Capturar</button>
 								  </div>
@@ -190,7 +190,7 @@
 			</div>
 		</div>
 		
-		<div class="tab-pane fade in" id="tab_ayuda" style="display: none">
+		<div class="tab-pane fade in" id="tab_ayuda">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -219,7 +219,7 @@
 	<script src="js/principal.js"></script>	
 	<script>
 		$("#btn_Manual").click(function() {
-			window.open('http://saga.cundinamarca.gov.co/vs/manuales/manual123.pdf', '_system', 'location=yes');
+			window.open('http://saga.cundinamarca.gov.co/Nuse/manuales/manual123.pdf', '_system', 'location=yes');
 		});
 		$("#btn_panico").click(function() {
 			navigator.geolocation.getCurrentPosition(success, failw, options);
