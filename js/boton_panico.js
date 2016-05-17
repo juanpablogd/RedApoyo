@@ -1,8 +1,8 @@
 var seg;
 var activo;
 var intervalo;
-var urlcaso = 'http://'+localStorage.url_servidor+'/SIG/servicios/m123/m123_guardar_caso_pruebas.php';
-//var url = 'http://'+localStorage.url_servidor+'/SIG/servicios/m123/m123_guardar_caso.php';
+//var urlcaso = 'http://'+localStorage.url_servidor+'/SIG/servicios/m123/m123_guardar_caso_pruebas.php';
+var urlcaso = 'http://'+localStorage.url_servidor+'/SIG/servicios/m123/m123_guardar_caso.php';
 
 $("#boton_panico").click(function(){
 	activar();
@@ -70,7 +70,7 @@ function restar(){ 						console.log(activo);
 	    		//ENVIO DE ALERTA AL SERVIDOR	//ENVIO DE ALERTA AL SERVIDOR
 				var now = new Date();	//Obtiene Fecha Actual
 				var fecha_creacion = now.getFullYear()+'-'+(1+now.getMonth())+'-'+now.getDate()+' '+now.getHours()+':'+now.getMinutes()+':'+now.getSeconds();
-				var id_unico = fecha_creacion+'-'+localStorage.id;
+				var id_unico = fecha_creacion+'-'+localStorage.id;  console.log(urlcaso);
 				var conexion = checkConnection(); 					console.log(conexion);
 				if(conexion=="SinRed" || conexion=="ConnexionDesconocida"){
 		            msj_peligro("Sin conexión de red ó desconocida: " + error);

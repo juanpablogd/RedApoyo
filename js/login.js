@@ -88,14 +88,27 @@ $(document).ready(function(){
 	$("#btn_ingresar").click(function() {
 
 		var cc = $("#cc").val().trim();
+		var tel = $("#telefono").val().trim();	console.log(serial + " " + imei + " " + tel + " " + tel.length);
 		//___FECHA
 		var now = new Date();	var fecha_captura = now.getFullYear()+'-'+(1+now.getMonth())+'-'+now.getDate()+'-'+now.getHours()+'_'+now.getMinutes()+'_'+now.getSeconds();
 		if(cc == ""){
 			msj_peligro("Digite Cédula");
 			$("#cc").focus();
 			return false;
+		}		
+		if(tel == ""){
+			msj_peligro("Digite el teléfono");
+			$("#telefono").focus();
+			return false;
+		}else{
+			var n = tel.length;
+			if(n<10){
+				msj_peligro("El teléfono debe mínimo 10 digitos");
+				$("#telefono").focus();
+				return false;
+			}
 		}
-		console.log(serial + " " + imei);
+		
         if(imei == null || imei == "" || imei === undefined){
 	        serial = cc;
 	        imei = cc;
@@ -103,6 +116,7 @@ $(document).ready(function(){
 		var parametros = new Object();
 			parametros['tabla'] = 'login';
 			parametros['cedula'] = cc;
+			parametros['telefono'] = tel;
 			
 			parametros['imei'] = imei;
 			parametros['serial'] = serial;

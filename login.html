@@ -57,8 +57,13 @@
 			    		<div class="form-group">
 			    			<label style="color: red">*</label>&nbsp;<label> Documento Identidad</label>
 			    		    <input class="form-control" placeholder="Cédula" id="cc" name="cc" type="text" >
+			    		</div>
+			    		<div class="form-group">
+			    			<label style="color: red">*</label><label for="telefono" class="select">Número teléfonico:</label>
+			    		    <input class="form-control" placeholder="Número teléfonico" id="telefono" name="telefono" type="number" onkeypress="if (event.keyCode< 48 || event.keyCode > 57) event.returnValue = false;">
 			    		    <p class="help-block" id="simno">Cargando...</p>
 			    		</div>
+			    		
 			    		<input class="btn btn-md btn-success btn-block" type="button" value="Ingresar" id="btn_ingresar">
 			    	</fieldset>
 			      	</form>

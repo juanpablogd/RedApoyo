@@ -115,7 +115,7 @@ function Resp_activacion(tx, results) {
 										      label: "Ok",
 										      className: "btn-success btn-block",
 										      callback: function() {
-												window.location = "principal.html";
+												window.location = "principal.html";	//window.location.replace("link.html"); //window.open("principal.html","_self");	
 										      }
 										    }
 										  }

@@ -86,6 +86,7 @@ $(document).ready(function(){
 				nom_reg = $(this).html();
 			});   
         	setMunicipio(id_reg,nom_reg);
+        	$('#busca_mpio').val(nom_reg);
 		});
 	});
 	
