@@ -67,22 +67,6 @@ $(document).ready(function(){
 
 	}
 //FIN BASE DE DATOS------------------------------------------------BASE DE DATOS-----------------------------------------------
-
-	function msj_peligro(msj){
-		$.growl(msj, { 
-				type: "danger", 
-				timer : 100,
-				delay: 3000,
-					animate: {
-						enter: 'animated bounceIn',
-						exit: 'animated bounceOut'
-					},
-					placement: {
-						from: "top",
-						align: "center"
-					}
-		});
-	}
 	
 //------ENVIAR REGISTRO------//
 	$("#btn_ingresar").click(function() {

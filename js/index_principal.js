@@ -34,7 +34,10 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         console.log('deviceready');
-        StatusBar.overlaysWebView(false);
+	    var devicePlatform = device.platform;	console.log(devicePlatform);
+	    if(devicePlatform == "iOS"){
+	    	StatusBar.overlaysWebView(false);
+	    }
         navigator.geolocation.getCurrentPosition(success, failw, options);
     }
 };

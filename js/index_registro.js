@@ -18,10 +18,8 @@ onDeviceReady: function() {
     } else {
         console.log('window.cordova.plugins NOT available');
     }
-    console.log('deviceready ' + device.platform);
-    StatusBar.overlaysWebView(false);
 
-    if(device.platform == "Android"){
+    if(devicePlatform == "Android"){
         var deviceInfo = cordova.require("cordova/plugin/DeviceInformation");
         deviceInfo.get(function(result) { //alert (result);
                        //Obtiene el Número de SIM
@@ -42,7 +40,8 @@ onDeviceReady: function() {
                        }, function() {
                        		console.log("Error: " + error);
                        });
-    } else if(device.platform == "iOS"){
+    } else if(devicePlatform == "iOS"){
+    	StatusBar.overlaysWebView(false);
     	$("#simno").html("");
         window.plugins.sim.getSimInfo(Sim_ok, Sim_error);
     }else {
