@@ -19,26 +19,38 @@
 var app = {
     // Application Constructor
     initialize: function() {
-        this.bindEvents();
-    },
-    // Bind Event Listeners
-    //
-    // Bind any events that are required on startup. Common events are:
-    // 'load', 'deviceready', 'offline', and 'online'.
-    bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
     },
-    // deviceready Event Handler
-    //
-    // The scope of 'this' is the event. In order to call the 'receivedEvent'
-    // function, we must explicitly call 'app.receivedEvent(...);'
-    onDeviceReady: function() {
-        console.log('deviceready');
+    onDeviceReady: function() { console.log('deviceready');
 	    var devicePlatform = device.platform;	console.log(devicePlatform);
 	    if(devicePlatform == "iOS"){
 	    	StatusBar.overlaysWebView(false);
 	    }
         navigator.geolocation.getCurrentPosition(success, failw, options);
-    }
+        document.addEventListener("backbutton", app.salir, false);
+    },
+    salir: function() {
+        bootbox.hideAll();
+        bootbox.dialog({
+          message: " ¿Está seguro que desea salir?",
+          title: "<span class=\"glyphicon glyphicon-warning-sign rojo \"></span> 123 Cundinamarca",
+          buttons: {
+            success: {
+              label: "Si",
+              className: "btn-success",
+              callback: function() {
+                navigator.app.exitApp();
+              }
+            },
+            main: {
+              label: "No",
+              className: "btn-primary",
+              callback: function() {
+                
+              }
+            }
+          }
+        });
+   }
 };
 app.initialize();

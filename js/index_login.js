@@ -27,34 +27,51 @@ initialize: function() {
 bindEvents: function() {
     document.addEventListener('deviceready', this.onDeviceReady, false);
 },
-    // deviceready Event Handler
-    // The scope of 'this' is the event. In order to call the 'receivedEvent'
-    // function, we must explicity call 'app.receivedEvent(...);'
+errorSim: function(error) {	console.log(error);
+},
+successSim: function(result) { console.log(JSON.stringify(result));	console.log(JSON.stringify(result.cards));
+	var devicePlatform = device.platform;	console.log(devicePlatform);
+	if(devicePlatform == "Android"){ // Android only: check permission // check permission
+
+	} else if(devicePlatform == "iOS"){
+		$("#simno").html("");
+	} else {
+			msj_peligro("No se encontró plataforma de desarrollo.");
+	}
+
+	//Obtiene el OPERADOR
+	operador = result.carrierName;	console.log("OPERADOR: "+operador);
+	//Obtiene el Número de SIM
+	serial = result.simSerialNumber;
+	$("#simno").html("SIM: " + serial);		console.log("SIM / Serial: "+serial);
+	//Obtiene el IMEI
+	imei = result.deviceId;					console.log("IMEI - sim.deviceId: " + result.deviceId);
+},
+successPermisos: function(result) { console.log(JSON.stringify(result));	console.log(result.hasPermission);
+	if(result.hasPermission){
+		$("#btn_ingresar").show();
+		window.plugins.sim.getSimInfo(app.successSim, app.errorSim);
+	}else{
+		$("#btn_ingresar").hide();
+		var permissions = cordova.plugins.permissions;
+		permissions.requestPermission(permissions.READ_PHONE_STATE, app.successPermisos, app.errorPermisos);
+	}
+},
+errorPermisos: function(error) {	console.log(error);
+	msj_peligro("Debe autorizar el permiso: " + error);
+	var permissions = cordova.plugins.permissions;
+	permissions.requestPermission(permissions.READ_PHONE_STATE, app.successPermisos, app.errorPermisos);
+},
+validaPermisos: function(){
+	var permissions = cordova.plugins.permissions;
+	permissions.requestPermission(permissions.READ_PHONE_STATE, app.successPermisos, app.errorPermisos);
+},
 onDeviceReady: function() {
     console.log('deviceready ' + device.platform);
-    var devicePlatform = device.platform;	console.log(devicePlatform);
+    var devicePlatform = device.platform;	//console.log(devicePlatform);
     if(devicePlatform == "iOS") StatusBar.overlaysWebView(false);
-    
-	window.plugins.sim.getSimInfo(
-		function(result) {		//console.log(result);
-		   if(devicePlatform == "Android"){
-		   		//Obtiene el Número de SIM
-	   			serial = result.simSerialNumber;
-                $("#simno").html("SIM: " + serial);		console.log("SIM / Serial: "+serial);
-                //Obtiene el IMEI
-                imei = result.deviceId;					console.log("IMEI - sim.deviceId: " + result.deviceId);
-           } else if(devicePlatform == "iOS"){
-				$("#simno").html("");
-           } else {
-           		msj_peligro("No se encontró plataforma de desarrollo.");
-           }
-           //Obtiene el OPERADOR
-           operador = result.carrierName;	console.log("OPERADOR: "+operador);
-       },
-		function(error) {
-			msj_peligro("Error equipo SIM: " + error);
-   		}
-	);
+    var permissions = cordova.plugins.permissions;
+    permissions.requestPermission(permissions.READ_PHONE_STATE, app.successPermisos, app.errorPermisos);
 }
 };
 
