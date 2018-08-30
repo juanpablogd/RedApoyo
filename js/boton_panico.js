@@ -40,13 +40,23 @@ function activar(){
 }
 
 function llamar(num){
-	window.PhoneCaller.call(num,
+		function onSuccessCall(result){
+		  console.log("Success Call:"+result);
+		}
+
+		function onErrorCall(result) {
+		  console.log("Error Call:"+result);
+		}
+	window.plugins.CallNumber.callNumber(onSuccessCall, onErrorCall, num+"+", false);
+	//window.location.href="tel://"+num;
+	//window.open("tel://"+num, '_system');
+/*	window.PhoneCaller.call(num,
 		function(success) { //alert('Dialing succeeded'); 
 		},
 		function(err) {
 		    if (err == "empty") msj_peligro("Número desconocido");
 		    else msj_peligro("Error llamada:" + err);        
-		});
+		});	*/
 }
     
 function desactivar(){
@@ -73,9 +83,9 @@ function restar(){ 						console.log(activo);
 				var id_unico = fecha_creacion+'-'+localStorage.id;  console.log(urlcaso);
 				var conexion = checkConnection(); 					console.log(conexion);
 				if(conexion=="SinRed" || conexion=="ConnexionDesconocida"){
-		            msj_peligro("Sin conexión de red ó desconocida: " + error);
+		            msj_peligro("Sin conexión de red ó desconocida: ");
 		            msj_exitoso("Llamando al 123 de la Policía!"); 
-		            llamar("123+"); 
+		            llamar("123"); 
 				}else{
 					var parametros = new Object();
 					parametros['fecha_creacion'] = fecha_creacion;
@@ -97,18 +107,18 @@ function restar(){ 						console.log(activo);
 									msj_exitoso("Caso Enviado Exitosamente");
 								}else{
 									msj_peligro("No se pudo realizar el registro, Verifique la Información");
-									llamar("123+");
+									llamar("123");
 								}
 							},
 							error: function (error) {
 								msj_peligro("Error al conectarse al servidor, revise su conexión a Internet");
-								llamar("123+");
+								llamar("123");
 						    }
 						});
 				}	//ENVIO DE ALERTA AL SERVIDOR	//ENVIO DE ALERTA AL SERVIDOR
 			}else{
 				msj_peligro("No hay Ubicación!!");
-				llamar("123+");				
+				llamar("123");				
 			}
 		}else{
 	    	intervalo = setTimeout(restar, 1200);

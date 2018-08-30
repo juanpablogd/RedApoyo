@@ -29,7 +29,7 @@ bindEvents: function() {
 },
 errorSim: function(error) {	console.log(error);
 },
-successSim: function(result) { console.log(JSON.stringify(result));	console.log(JSON.stringify(result.cards));
+successSim: function(result) { console.log(JSON.stringify(result));	//console.log(JSON.stringify(result.cards));
 	var devicePlatform = device.platform;	console.log(devicePlatform);
 	if(devicePlatform == "Android"){ // Android only: check permission // check permission
 
@@ -46,6 +46,9 @@ successSim: function(result) { console.log(JSON.stringify(result));	console.log(
 	$("#simno").html("SIM: " + serial);		console.log("SIM / Serial: "+serial);
 	//Obtiene el IMEI
 	imei = result.deviceId;					console.log("IMEI - sim.deviceId: " + result.deviceId);
+	var txtNumero = result.phoneNumber.replace('+57', '');
+	//Obtiene el número telefonico
+	$("#telefono").val(txtNumero);	//console.log("Telefono: " + result.phoneNumber);
 },
 successPermisos: function(result) { console.log(JSON.stringify(result));	console.log(result.hasPermission);
 	if(result.hasPermission){

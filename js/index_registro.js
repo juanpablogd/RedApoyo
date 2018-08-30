@@ -67,20 +67,22 @@ successSim: function(result) { console.log(JSON.stringify(result)); console.log(
 */
 
 },
-successPermisos: function(result) { console.log(JSON.stringify(result));  console.log(result.hasPermission);
+successPermisos: function(result) {   //console.log(JSON.stringify(result));  console.log(result.hasPermission);
   if(result.hasPermission){
     $("#btn_registro").show();
     window.plugins.sim.getSimInfo(app.successSim, app.errorSim);
   }else{
     $("#btn_registro").hide();
     var permissions = cordova.plugins.permissions;
-    permissions.requestPermission(permissions.READ_PHONE_STATE, app.successPermisos, app.errorPermisos);
+    var listReq = [permissions.READ_PHONE_STATE,permissions.CALL_PHONE];
+    permissions.requestPermission(listReq, app.successPermisos, app.errorPermisos);
   }
 },
 errorPermisos: function(error) {  console.log(error);
   msj_peligro("Debe autorizar el permiso: " + error);
   var permissions = cordova.plugins.permissions;
-  permissions.requestPermission(permissions.READ_PHONE_STATE, app.successPermisos, app.errorPermisos);
+  var listReq = [permissions.READ_PHONE_STATE,permissions.CALL_PHONE];
+  permissions.requestPermission(listReq, app.successPermisos, app.errorPermisos);
 },
 onDeviceReady: function() {
     if (window.cordova && window.cordova.plugins) {
@@ -90,7 +92,10 @@ onDeviceReady: function() {
     }
 
     var permissions = cordova.plugins.permissions;
-    permissions.requestPermission(permissions.READ_PHONE_STATE, app.successPermisos, app.errorPermisos);
+    var listReq = [permissions.READ_PHONE_STATE,permissions.CALL_PHONE];
+
+    permissions.requestPermission(listReq, app.successPermisos, app.errorPermisos);
+
 }
 };
 
