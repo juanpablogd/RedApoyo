@@ -31,7 +31,7 @@ var failw = function(error) {
  	$("#alerta_ubicacion").show();
 };
 
-setInterval(function(){		console.log(device.platform);
+setInterval(function(){		//console.log(device.platform);
 		console.log("Busca Ubicación"); 
 		navigator.geolocation.getCurrentPosition(success, failw, options);
 }, 1000*20);
