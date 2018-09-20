@@ -23,8 +23,7 @@ $(document).ready(function(){
 		$(this).val(vr);
 	});
 	
-	function setMunicipio(id,nom){
-		console.log(id + ' ' + nom);
+	function setMunicipio(id,nom){	//console.log(id + ' ' + nom);
 		$('#municipio').attr("valor",id);
 		$('#municipio').html('Municipio: '+nom);
 	}
