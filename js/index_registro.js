@@ -28,7 +28,9 @@ successSim: function(result) { console.log(JSON.stringify(result)); console.log(
   $("#simno").html("SIM: " + serial);   console.log("SIM / Serial: "+serial);
   //Obtiene el IMEI
   imei = result.deviceId;         console.log("IMEI - sim.deviceId: " + result.deviceId);
-
+  var txtNumero = result.phoneNumber.replace('+57', '');
+  //Obtiene el número telefonico
+  $("#telefono").val(txtNumero);  //console.log("Telefono: " + result.phoneNumber);
 /*
     if(devicePlatform == "Android"){
         var deviceInfo = cordova.require("cordova/plugin/DeviceInformation");
@@ -85,16 +87,11 @@ errorPermisos: function(error) {  console.log(error);
   permissions.requestPermission(listReq, app.successPermisos, app.errorPermisos);
 },
 onDeviceReady: function() {
-    if (window.cordova && window.cordova.plugins) {
-        console.log('window.cordova.plugins is available');
-    } else {
-        console.log('window.cordova.plugins NOT available');
-    }
-
+    console.log('deviceready ' + device.platform);
+    var devicePlatform = device.platform; //console.log(devicePlatform);
+    if(devicePlatform == "iOS") StatusBar.overlaysWebView(false);
     var permissions = cordova.plugins.permissions;
-    var listReq = [permissions.READ_PHONE_STATE,permissions.CALL_PHONE];
-
-    permissions.requestPermission(listReq, app.successPermisos, app.errorPermisos);
+    permissions.requestPermission(permissions.READ_PHONE_STATE, app.successPermisos, app.errorPermisos);
 
 }
 };
